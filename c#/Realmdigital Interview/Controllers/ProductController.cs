@@ -9,10 +9,11 @@ using Newtonsoft.Json;
 
 namespace Realmdigital_Interview.Controllers
 {
-    public class ProductController
+    [RoutePrefix("product")]
+    public class ProductController : ApiController
     {
-
-        [Route("product")]
+        [HttpGet]
+        [Route("GetByID")]
         public object GetProductById(string productId)
         {
             string response = "";
@@ -49,7 +50,8 @@ namespace Realmdigital_Interview.Controllers
             return result.Count > 0 ? result[0] : null;
         }
 
-        [Route("product/search")]
+        [HttpGet]
+        [Route("search")]
         public List<object> GetProductsByName(string productName)
         {
             string response = "";
