@@ -6,6 +6,7 @@ using System.Net;
 using System.Web;
 using System.Web.Http;
 using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace Realmdigital_Interview.Controllers
 {
@@ -52,7 +53,7 @@ namespace Realmdigital_Interview.Controllers
 
         [HttpGet]
         [Route("search")]
-        public List<object> GetProductsByName(string productName)
+        public HttpResponseMessage GetProductsByName(string productName)
         {
             string response = "";
 
@@ -85,22 +86,13 @@ namespace Realmdigital_Interview.Controllers
                     Prices = prices
                 });
             }
-            return result;
+            return Request.CreateResponse(HttpStatusCode.OK, result);
         }
     }
 
 
 
-    class ApiResponseProduct
-    {
-        public string BarCode { get; set; }
-        public string ItemName { get; set; }
-        public List<ApiResponsePrice> PriceRecords { get; set; }
-    }
+    
 
-    class ApiResponsePrice
-    {
-        public string SellingPrice { get; set; }
-        public string CurrencyCode { get; set; }
-    }
+   
 }
